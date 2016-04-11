@@ -6,22 +6,42 @@
 # ----------------------------------------------------------
 Problem: 
 - Name: unknown
-  Lower bound: -inf
-  Upper bound: inf
+  Lower bound: 1017540.0
+  Upper bound: 1017540.0
   Number of objectives: 1
   Number of constraints: 5
-  Number of variables: 3
-  Number of nonzeros: 5
+  Number of variables: 4
+  Number of nonzeros: 7
   Sense: minimize
 # ----------------------------------------------------------
 #   Solver Information
 # ----------------------------------------------------------
 Solver: 
 - Status: ok
-  Termination condition: infeasible
+  Termination condition: optimal
   Statistics: 
     Branch and bound: 
       Number of bounded subproblems: 0
       Number of created subproblems: 0
   Error rc: 0
-  Time: 0.005934953689575195
+  Time: 0.006311893463134766
+# ----------------------------------------------------------
+#   Solution Information
+# ----------------------------------------------------------
+Solution: 
+- number of solutions: 1
+  number of solutions displayed: 1
+- Gap: 0.0
+  Status: feasible
+  Message: None
+  Objective:
+    DispatchCost:
+      Value: 1017540
+  Variable:
+    DispatchMW[peak]:
+      Value: 4
+    InstallCapacityMW:
+      Value: 1
+    DispatchMW[mean]:
+      Value: 2
+  Constraint: No values

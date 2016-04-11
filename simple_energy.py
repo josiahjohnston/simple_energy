@@ -23,18 +23,29 @@ model.timepoint_duration_hr = Param(model.TIMEPOINTS, default={'peak': 10, 'mean
 model.load_mw = Param(model.TIMEPOINTS, default={'peak': 4, 'mean':2})
 model.dispatch_cost = Param(model.TIMEPOINTS, default=1, doc="dispatch cost in $/MWh")
 model.installed_capacity = Param(default=3)
+model.new_capacity_cost = Param(default=1000000)
 
 # Decision variables
 model.DispatchMW = Var(model.TIMEPOINTS)
+model.InstallCapacityMW = Var()
+
+# Expression
+def AvailableCapacityMW_rule(mod):
+    return mod.installed_capacity + mod.InstallCapacityMW
+model.AvailableCapacityMW = Expression(rule=AvailableCapacityMW_rule)
 
 # The objective is written in two steps: 
 # 1: A python function that takes a model as an argument at run time, and returns
 # a mathematical formula using components from the model.
 # 2: Attach the python function to the model as the objective.
 def Dispatch_Cost_rule(mod):
-    return sum(
-        mod.dispatch_cost[t] * mod.DispatchMW[t] * mod.timepoint_duration_hr[t]
-        for t in mod.TIMEPOINTS)
+    return (
+        sum(
+            mod.dispatch_cost[t] * mod.DispatchMW[t] * mod.timepoint_duration_hr[t]
+            for t in mod.TIMEPOINTS
+        ) +
+        mod.new_capacity_cost * mod.InstallCapacityMW
+    )
 model.DispatchCost = Objective(rule=Dispatch_Cost_rule)
 
 # The constraint is also written in two steps, and needs to return
@@ -44,7 +55,7 @@ def Conservation_Of_Energy_rule(mod, t):
 model.Conservation_Of_Energy = Constraint(model.TIMEPOINTS, rule=Conservation_Of_Energy_rule)
 
 def Enforce_Dispatch_Limit_rule(mod, t):
-    return mod.DispatchMW[t] <= mod.installed_capacity
+    return mod.DispatchMW[t] <= mod.AvailableCapacityMW
 model.Enforce_Dispatch_Limit = Constraint(model.TIMEPOINTS, rule=Enforce_Dispatch_Limit_rule)
 
 
