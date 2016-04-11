@@ -13,7 +13,7 @@ model = AbstractModel()
 
 # Define parameters along with default values so we don't have to use a 
 # separate data file.
-model.load_mwh = Param(default=2)
+model.load_mwh = Param(default=17520)
 model.dispatch_cost = Param(default=1, doc="dispatch cost in $/MWh")
 
 # Decision variables
