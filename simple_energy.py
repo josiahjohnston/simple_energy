@@ -22,6 +22,7 @@ model.TIMEPOINTS = Set(initialize=['peak', 'mean'])
 model.timepoint_duration_hr = Param(model.TIMEPOINTS, default={'peak': 10, 'mean':8750})
 model.load_mw = Param(model.TIMEPOINTS, default={'peak': 4, 'mean':2})
 model.dispatch_cost = Param(model.TIMEPOINTS, default=1, doc="dispatch cost in $/MWh")
+model.installed_capacity = Param(default=5)
 
 # Decision variables
 model.DispatchMW = Var(model.TIMEPOINTS)
@@ -41,6 +42,11 @@ model.DispatchCost = Objective(rule=Dispatch_Cost_rule)
 def Conservation_Of_Energy_rule(mod, t):
     return mod.load_mw[t] == mod.DispatchMW[t]
 model.Conservation_Of_Energy = Constraint(model.TIMEPOINTS, rule=Conservation_Of_Energy_rule)
+
+def Enforce_Dispatch_Limit_rule(mod, t):
+    return mod.DispatchMW[t] <= mod.installed_capacity
+model.Enforce_Dispatch_Limit = Constraint(model.TIMEPOINTS, rule=Enforce_Dispatch_Limit_rule)
+
 
 
 # Some boilerplate code to execute this model with `python simple_energy.py`

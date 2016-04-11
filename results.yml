@@ -9,9 +9,9 @@ Problem:
   Lower bound: 17540.0
   Upper bound: 17540.0
   Number of objectives: 1
-  Number of constraints: 3
+  Number of constraints: 5
   Number of variables: 3
-  Number of nonzeros: 3
+  Number of nonzeros: 5
   Sense: minimize
 # ----------------------------------------------------------
 #   Solver Information
@@ -24,7 +24,7 @@ Solver:
       Number of bounded subproblems: 0
       Number of created subproblems: 0
   Error rc: 0
-  Time: 0.005816221237182617
+  Time: 0.006232023239135742
 # ----------------------------------------------------------
 #   Solution Information
 # ----------------------------------------------------------
