@@ -22,7 +22,7 @@ model.TIMEPOINTS = Set(initialize=['peak', 'mean'])
 model.timepoint_duration_hr = Param(model.TIMEPOINTS, default={'peak': 10, 'mean':8750})
 model.load_mw = Param(model.TIMEPOINTS, default={'peak': 4, 'mean':2})
 model.dispatch_cost = Param(model.TIMEPOINTS, default=1, doc="dispatch cost in $/MWh")
-model.installed_capacity = Param(default=5)
+model.installed_capacity = Param(default=3)
 
 # Decision variables
 model.DispatchMW = Var(model.TIMEPOINTS)
