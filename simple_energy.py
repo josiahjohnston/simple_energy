@@ -33,6 +33,7 @@ def Conservation_Of_Energy_rule(mod):
     return mod.load_mwh == mod.DispatchMWh
 energy_model.Conservation_Of_Energy = Constraint(rule=Conservation_Of_Energy_rule)
 
+model = energy_model
 
 # Some boilerplate code to execute this model with `python simple_energy.py`
 if __name__ == '__main__':
