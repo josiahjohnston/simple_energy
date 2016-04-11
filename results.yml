@@ -6,12 +6,12 @@
 # ----------------------------------------------------------
 Problem: 
 - Name: unknown
-  Lower bound: 17520.0
-  Upper bound: 17520.0
+  Lower bound: 17540.0
+  Upper bound: 17540.0
   Number of objectives: 1
-  Number of constraints: 2
-  Number of variables: 2
-  Number of nonzeros: 2
+  Number of constraints: 3
+  Number of variables: 3
+  Number of nonzeros: 3
   Sense: minimize
 # ----------------------------------------------------------
 #   Solver Information
@@ -24,7 +24,7 @@ Solver:
       Number of bounded subproblems: 0
       Number of created subproblems: 0
   Error rc: 0
-  Time: 0.006999969482421875
+  Time: 0.005816221237182617
 # ----------------------------------------------------------
 #   Solution Information
 # ----------------------------------------------------------
@@ -36,8 +36,10 @@ Solution:
   Message: None
   Objective:
     DispatchCost:
-      Value: 17520
+      Value: 17540
   Variable:
-    DispatchMWh:
-      Value: 17520
+    DispatchMW[peak]:
+      Value: 4
+    DispatchMW[mean]:
+      Value: 2
   Constraint: No values
