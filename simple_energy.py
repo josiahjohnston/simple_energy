@@ -1,7 +1,7 @@
 """
 A super-simple energy operations model. 
 You may execute it with the command:
-   pyomo solve --solver=glpk simple_energy.py
+   python simple_energy.py
 """
 
 from pyomo.environ import *
@@ -32,3 +32,14 @@ model.DispatchCost = Objective(rule=Dispatch_Cost_rule)
 def Conservation_Of_Energy_rule(mod):
     return mod.load_mwh == mod.DispatchMWh
 model.Conservation_Of_Energy = Constraint(rule=Conservation_Of_Energy_rule)
+
+
+# Some boilerplate code to execute this model with `python simple_energy.py`
+if __name__ == '__main__':
+    from pyomo.opt import SolverFactory
+    import pyomo.environ
+    opt = SolverFactory("glpk")
+    model_instance = model.create_instance()
+    results = opt.solve(model_instance)
+    model_instance.pprint()
+    results.write()    
